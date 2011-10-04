@@ -26,7 +26,7 @@ class SorterBehavior extends ModelBehavior {
      *
      * @var <array>
      */
-    var $_settings = array(
+    protected $_settings = array(
         'column' => 'sort',     // ソート対象のカラム
         'conditions' => array(),
     );
@@ -38,11 +38,11 @@ class SorterBehavior extends ModelBehavior {
      * @param <type> $model
      * @param <type> $settings 
      */
-    function setup(&$model, $settings = array()){
+    public function setup($model, $settings = array()){
         $this->setSettings($settings);
     }
 
-    function setSettings($settings = array()) {
+    public function setSettings($settings = array()) {
         $this->_settings = Set::merge($this->_settings, $settings);
     }
 
@@ -54,7 +54,7 @@ class SorterBehavior extends ModelBehavior {
      * @param <type> $id
      * @return <type>
      */
-    function sortup(&$model, $id=null) {
+    public function sortup($model, $id=null) {
 
         $query = array(
             'conditions' => $this->_settings['conditions'],
@@ -107,7 +107,7 @@ class SorterBehavior extends ModelBehavior {
      * @param <type> $id
      * @return <type>
      */
-    function sortdown(&$model, $id=null) {
+    public function sortdown($model, $id=null) {
 
         $query = array(
             'conditions' => $this->_settings['conditions'],
@@ -158,7 +158,7 @@ class SorterBehavior extends ModelBehavior {
      * @access public
      * @param <type> $model 
      */
-    function beforeSave(&$model) {
+    public function beforeSave($model) {
         // 新規登録かつソートカラムが未セットの場合
         if ( empty($model->data[$model->alias][$model->primaryKey]) && empty($model->data[$model->alias][$this->_settings['column']]) ) {
             // 既にセットされているソートNoの最大値を取得
@@ -178,6 +178,8 @@ class SorterBehavior extends ModelBehavior {
             // 最大値+1をセット
             $model->data[$model->alias][$this->_settings['column']] = $maxNumber+1;
         }
+        
+        return true;
     }
 
 }

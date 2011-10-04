@@ -16,37 +16,37 @@
  *
  * @author        Hideyuki Kagasawa. (kagasawa@web-prom.net)
  */
-class SorterComponent extends Object {
+class SorterComponent extends Component {
 
-    var $components = array('Session');
-    var $_controller;
-    var $_model;
+    public $components = array('Session');
+    private $_controller;
+    private $_model;
 
-	function initialize(&$controller,$settings = array()) {
-	}
-	function startup(&$controller) {
-        $this->_controller = $controller;
+    public function initialize($controller, $settings = array()) {
+    }
+    public function startup($controller) {
+        $this->_controller =& $controller;
 
         if ( !method_exists($controller, $controller->action) && method_exists($this, $controller->action) ) {
             $this->_model = ClassRegistry::init($controller->modelClass);
             call_user_func(array($this, $controller->action), $controller->params['pass'][0]);
         }
-	}
+    }
 
     /**
      * sortup
      *
      * @param <type> $id
      */
-    function sortup($id = null) {
+    public function sortup($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid id for ModelClass', true), 'error');
+            $this->Session->setFlash(__('Invalid id for ModelClass'));
             $this->_controller->redirect(array('action'=>'index'));
         }
         if ( $this->_model->sortup($id) ) {
-            $this->Session->setFlash(__('Success sortup', true), 'correct');
+            $this->Session->setFlash(__('Success sortup'));
         } else {
-            $this->Session->setFlash(__('The ModelClass could not be sortup. Please, try again.', true), 'error');
+            $this->Session->setFlash(__('The ModelClass could not be sortup. Please, try again.'));
         }
         $this->_controller->redirect(array('action' => 'index'));
     }
@@ -56,15 +56,15 @@ class SorterComponent extends Object {
      *
      * @param <type> $id
      */
-    function sortdown($id = null) {
+    public function sortdown($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid id for ModelClass', true), 'error');
+            $this->Session->setFlash(__('Invalid id for ModelClass'));
             $this->_controller->redirect(array('action'=>'index'));
         }
         if ( $this->_model->sortdown($id) ) {
-            $this->Session->setFlash(__('Success sortdown', true), 'correct');
+            $this->Session->setFlash(__('Success sortdown'));
         } else {
-            $this->Session->setFlash(__('The ModelClass could not be sortdown. Please, try again.', true), 'error');
+            $this->Session->setFlash(__('The ModelClass could not be sortdown. Please, try again.'));
         }
         $this->_controller->redirect(array('action' => 'index'));
     }

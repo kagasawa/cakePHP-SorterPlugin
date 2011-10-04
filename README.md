@@ -1,4 +1,4 @@
-# SortPlugin for CakePHP #
+# SortPlugin for CakePHP2.0RC3 #
 
 一覧に上下のリンクを追加して並び順を入れ替えるplug-inです。
 
@@ -6,7 +6,7 @@
 
 First, put `sorter’ directory on app/plugins in your CakePHP application.
 
-1, app/plugins 以下に sorter のディレクトリ名で配置します。
+1, app/Plugin 以下に Sorter のディレクトリ名で配置します。
 
 Second, The sorting column is added to the table.
 
@@ -20,7 +20,7 @@ Third, Behavior is defined.
 
     <?php
         class Table extends Model {
-            var $actsAs = array(
+            public $actsAs = array(
                 'Sorter.Sorter' => array(
                     'column' => 'sort'
                 )
@@ -32,7 +32,7 @@ Four, Component is defined.
 
     <?php
         class HogeController extends Controller {
-            var $components = array('Sorter.Sorter');
+            public $components = array('Sorter.Sorter');
         }
 
 
