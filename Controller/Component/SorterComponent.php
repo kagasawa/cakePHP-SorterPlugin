@@ -7,7 +7,7 @@
  * PHP versions 4 and 5
  *
  * @copyright     COPYRIGHTS (C) 2011 Web-Promotions Limited. All Rights Reserved.
- * @link          http://www.u-station.co.jp/
+ * @link          http://www.web-prom.net/
  * @package       cake
  * @version       $Revision$
  * @modifiedby    $LastChangedBy$
